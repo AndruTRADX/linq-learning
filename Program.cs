@@ -9,4 +9,4 @@ static void PrintValues(IEnumerable<Book> bookList)
   }
 }
 
-PrintValues(queries.GetCollection());
+PrintValues(queries.WhereChallengeTwo());
