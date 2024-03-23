@@ -1,4 +1,4 @@
-﻿LinqQueries queries = new LinqQueries();
+﻿LinqQueries queries = new();
 
 static void PrintValues(IEnumerable<Book> bookList)
 {
@@ -9,4 +9,4 @@ static void PrintValues(IEnumerable<Book> bookList)
   }
 }
 
-PrintValues(queries.WhereChallengeTwo());
+PrintValues(queries.SkipChallengeOne());
