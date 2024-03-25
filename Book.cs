@@ -12,8 +12,8 @@ public class Book
         ShortDescription = "";
         LongDescription = "";
         Status = "";
-        Authors = new string[0];
-        Categories = new string[0];
+        Authors = [];
+        Categories = [];
     }
 
     public string Title { get; set; }

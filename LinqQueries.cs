@@ -116,4 +116,60 @@ public class LinqQueries
   {
     return booksCollection.MaxBy(book => book.PublishedDate);
   }
+
+  // Sum: Sums all the elements of a list and return the result
+  public int SumChallengeOne()
+  {
+    return booksCollection.Where(book => book.PageCount >= 0 && book.PageCount <= 500).Sum(book => book.PageCount);
+  }
+
+  // Aggregate: Used to accumulate some data within a variable and return this accumulated value
+  public string AggregateChallengeOne()
+  {
+    return booksCollection
+      .Where(book => book.PublishedDate.Year > 2015)
+      .Aggregate("", (bookTitles, next) =>
+      {
+        if (bookTitles != string.Empty)
+          bookTitles += " - " + next.Title;
+        else
+          bookTitles += next.Title;
+
+        return bookTitles;
+      });
+  }
+
+  // Average: It allows us to take an average of a numerical property that we have within the collection
+  public double AverageChallengeOne()
+  {
+    return booksCollection.Average(book => book.Title.Length);
+  }
+
+  // --------------- Data clustering --------------- //
+
+  // GroupBy: Allows data to be grouped by a property
+  public IEnumerable<IGrouping<int, Book>> GroupByChallengeOne()
+  {
+    return booksCollection.Where(p => p.PublishedDate.Year >= 200).GroupBy(book => book.PublishedDate.Year);
+  }
+
+  // Lookup: Allows you to use the entire collection in a dictionary and group the data by a property.
+  public ILookup<char, Book> LookupChallengeOne()
+  {
+    return booksCollection.ToLookup(book => book.Title[0], book => book);
+  }
+
+  // Join: Allows us to intercept two collections and return the elements found in both collections
+  public IEnumerable<Book> JoinChallengeOne()
+  {
+    IEnumerable<Book> collection = booksCollection.Where(x => x.PublishedDate.Year > 2005);
+    IEnumerable<Book> result = booksCollection
+      .Where(y => y.PageCount > 500)
+      .Join(collection,
+        y => y.Title,
+        x => x.Title,
+        (y, x) => y);
+
+    return result;
+  }
 }
